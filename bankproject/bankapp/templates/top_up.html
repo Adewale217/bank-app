@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Top Up Balance</h2>
+
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'error' %}
+            <p style="color: red;">{{ message }}</p>
+        {% else %}
+            <p style="color: green;">{{ message }}</p>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+<form method="POST">
+    {% csrf_token %}
+    
+    <label for="amount">Enter Amount ($):</label>
+    <input type="number" name="amount" min="100" max="10000" required>
+    
+    <label for="password">Confirm Password:</label>
+    <input type="password" name="password" required>
+
+    <button type="submit">Top Up</button>
+</form>
+
+<a href="{% url 'dashboard' %}">Back to Dashboard</a>
+{% endblock %}

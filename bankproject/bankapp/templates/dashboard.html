@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dave Bank</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header::after {
+            content: "";
+            /* display: block; */
+            width: 50px;
+            height: 3px;
+            background: #ff8c00;
+            /* margin-right: 70%; */
+            position: absolute;
+            left: 14.5%;
+            top: 42px;
+            border-radius: 5px;
+        }
+
+        .account-balance, .transaction-history-button {
+            display: inline-block;
+            width: 48%;
+            padding: 20px;
+            background-color: #ff8c00;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .transaction-history-button {
+            text-align: right;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+        .button {
+            padding: 10px 20px;
+            background-color: #ff8c00;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .button a{
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="color: #fff;">Dashboard</h1>
+    <div class="container">
+        <div class="header">
+        {% if user.is_authenticated %}
+            <div style="color: rgba(255, 255, 255, 0.7);"><strong>Welcome:</strong> {{ username }}</div><br>
+            <a href="{% url 'logout' %}" style="text-decoration: none; color: rgba(255, 255, 255, 0.7);">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+        {% endif %}
+
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color: green;">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+        </div>
+        
+    </div>
+    <div class="container">
+        <div class="account-balance">
+            <h2>Account Balance</h2>
+            <p>Current Balance: $ {{ balance }}</p>
+        </div>
+        <div class="transaction-history-button">
+            <h2>Transaction History</h2>
+            <button class="button">View Transactions</button>
+        </div>
+    </div>
+    <div class="container">
+        <div class="buttons">
+            <button class="button"><a href="{% url 'transfer' %}">Transfer</a></button>
+            <a href="{% url 'top_up' %}"><button class="button">Top_Up</button></a>
+            <button class="button">Data</button>
+            <button class="button">Pay Bills</button>
+        </div>
+    </div>
+</body>
+</html>
+

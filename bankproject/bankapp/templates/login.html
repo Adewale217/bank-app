@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        /* Import Google Font */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .transfer-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 12px;
+            width: 350px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        h2 {
+            color: #fff;
+            font-size: 22px;
+            margin-top: 90px;
+        }
+
+        p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        label {
+            color: #fff;
+            font-size: 14px;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            outline: none;
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        input:focus {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 16px;
+        }
+
+        .transfer-btn {
+            background: #ff8c00;
+            color: #fff;
+            margin-top: 10px;
+        }
+
+        .transfer-btn:hover {
+            background: #ffa500;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 10px;
+            color: #ff8c00;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            text-decoration: underline;
+        }
+
+        /* Pseudo-elements for extra styling */
+        h2::after {
+            content: "";
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: #ff8c00;
+            margin: 10px auto;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="transfer-container">
+        <h2>login into your bank account</h2>
+        <p>Securely send money with ease to other users using their phone number.</p>
+
+        {% if error %}
+            <p style="color: red;">{{ error }}</p>
+        {% endif %}
+
+        <form method="POST" id="signup-form">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">username</label>
+                <input type="text" id="username" name="username" required placeholder="Enter username">
+            </div>
+
+            <div class="form-group">
+                <label for="number">phone number</label>
+                <input type="number" id="number" name="number" required placeholder="Enter phone number">
+            </div>
+
+            <div class="form-group">
+                <label for="email">email</label>
+                <input type="email" id="email" name="email" required placeholder="Enter email">
+            </div>
+
+            <div class="form-group">
+                <label for="password">password</label>
+                <input type="password" id="password" name="password" required placeholder="Enter password">
+            </div>
+
+            <button type="submit" class="transfer-btn">login</button>
+        </form>
+
+       <p>don't have an account <a href="{% url 'signup' %}" class="back-btn">signup</a></p>
+    </div>
+</body>
+</html>
